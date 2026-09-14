@@ -1,0 +1,41 @@
+# SIP Extension Methods
+
+## 1. INFO
+- Sends mid-dialog control signals without changing media.
+- Example: DTMF keypresses in IVR.
+
+## 2. PRACK
+- Acknowledges provisional 1xx responses reliably (RFC 3262).
+- Ensures important early media info isn't lost.
+
+## 3. SUBSCRIBE & NOTIFY
+- SUBSCRIBE: Request to track an event/status.
+- NOTIFY: Server pushes updates when status changes.
+
+## 4. UPDATE
+- Lightweight mid-call SDP update without re-INVITE.
+- Works even before call is fully established.
+
+## 5. MESSAGE
+- Sends instant text messages (RFC 3428).
+- No call/session needed.
+
+## 6. REFER
+- Commands recipient to contact a third party (RFC 3515).
+- Used for call transfer.
+
+## 7. PUBLISH
+- Publishes user's presence state to server (RFC 3903).
+- Example: Available, Busy, DND.
+
+## Quick Cheat Sheet
+
+| Method | Role | Analogy |
+|--------|------|---------|
+| INFO | Mid-call signaling | DTMF keypad |
+| PRACK | Reliable 1xx delivery | Confirm provisional response |
+| SUBSCRIBE/NOTIFY | Status tracking | Voicemail alert |
+| UPDATE | Quick SDP update | Early codec change |
+| MESSAGE | Instant messaging | SMS/Chat |
+| REFER | Call transfer | Forward call |
+| PUBLISH | Presence publication | Status update |
