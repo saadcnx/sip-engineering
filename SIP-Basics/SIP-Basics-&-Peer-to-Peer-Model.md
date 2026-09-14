@@ -11,7 +11,7 @@
 
 - An endpoint typically functions as both UAC and UAS (Client-Server model between phones and SIP servers).
 
-- Purpose: Creating, modifying, and terminating sessions with one or more participants.
+- SIP Protocol Purpose: Creating, modifying, and terminating sessions with one or more participants.
 
 - Session Types: Multimedia conferencing, Internet telephony calls, multimedia distribution.
 
