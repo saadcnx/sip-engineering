@@ -1,0 +1,60 @@
+# SIP Response Classes Breakdown
+
+## 1xx: Informational / Provisional
+Request has been received and the server is working on it. These are temporary and do not complete the transaction.
+
+- **100 Trying:** Request received; next hop lookup in progress (sent immediately to stop retransmission).
+- **180 Ringing:** Target endpoint is ringing (caller hears ringback tone).
+- **181 Call is Being Forwarded:** Call is being diverted/forwarded to another destination.
+- **183 Session Progress:** Used for early media (e.g., custom announcements or operator tones before connect; carries SDP).
+
+## 2xx: Success
+Request was successfully received, understood, and accepted. This is a final response and closes the transaction.
+
+- **200 OK:** Universal success code (INVITE accepted, REGISTER complete, BYE succeeded).
+- **202 Accepted:** Request accepted for processing, but execution is still pending (commonly used in asynchronous event monitoring).
+
+## 3xx: Redirection
+Client must contact another SIP element/URI to complete the request.
+
+- **300 Multiple Choices:** Target user is available at multiple locations/devices.
+- **301 Moved Permanently:** User's SIP URI has changed permanently.
+- **302 Moved Temporarily:** User is temporarily available at another address (Contact header contains next hop).
+
+## 4xx: Client Error
+Request syntax is wrong, authentication is missing, or client-side parameters mismatch.
+
+- **401 Unauthorized:** UAC authentication required (challenge response).
+- **407 Proxy Authentication Required:** Proxy-level security credentials required.
+- **404 Not Found:** Dialed SIP URI or extension does not exist in database.
+- **486 Busy Here:** Target endpoint is busy.
+- **487 Request Terminated:** Pending request was terminated (e.g., caller sends CANCEL during ringing).
+- **488 Not Acceptable Here:** Media capabilities/codecs do not match (codec mismatch).
+
+## 5xx: Server Error
+Client request is valid, but there is a server-side routing, capacity, or upstream gateway failure.
+
+- **500 Server Internal Error:** SIP server software crash or configuration glitch.
+- **502 Bad Gateway:** SIP Gateway received an invalid response from upstream PSTN/TRUNK network.
+- **503 Service Unavailable:** Server is overloaded or in maintenance.
+
+## 6xx: Global Failure
+Request cannot be fulfilled by any server in the entire SIP network (Global Terminal Rejection).
+
+- **600 Busy Everywhere:** All target user's devices/endpoints are busy.
+- **603 Decline:** Target user explicitly rejected/declined the call.
+- **604 Does Not Exist Anywhere:** Requested user identity does not exist anywhere on the network.
+
+## Quick Summary Table
+
+| Class | Type | Final or Provisional? | Main Codes |
+|-------|------|----------------------|------------|
+| 1xx | Informational | Provisional (non-final) | 100, 180, 183 |
+| 2xx | Success | Final | 200, 202 |
+| 3xx | Redirection | Final | 301, 302 |
+| 4xx | Client Error | Final | 401, 404, 486, 487, 488 |
+| 5xx | Server Error | Final | 500, 502, 503 |
+| 6xx | Global Failure | Final | 600, 603 |
+
+💡 **Pro-Tip (Asterisk / VoIP Debugging):**
+In packet captures (Wireshark/CLI), the most common failure codes are **401** (password challenge), **404** (wrong dialplan route), **488** (codec mismatch), and **503** (trunk offline).
